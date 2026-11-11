@@ -4,65 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Things I like, by room</title>
-<style>
-  :root{
-    --bg:#f6f2ec; --ink:#1f1d1a; --muted:#6b645b; --line:#e2dacd; --card:#ffffff;
-    --accent:#8a5a35; --mine:#1f6b4a; --confirm:#b0701a;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-  header{padding:40px 24px 24px;max-width:1100px;margin:0 auto}
-  h1{font-size:clamp(28px,5vw,42px);margin:0 0 6px;letter-spacing:-.01em}
-  .sub{color:var(--muted);margin:0 0 18px}
-  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
-  nav{position:sticky;top:0;background:rgba(246,242,236,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:5}
-  nav ul{list-style:none;margin:0 auto;padding:10px 24px;max-width:1100px;display:flex;gap:18px;flex-wrap:wrap}
-  nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px}
-  nav a:hover{color:var(--accent)}
-  main{max-width:1100px;margin:0 auto;padding:8px 24px 64px}
-  section{padding-top:36px}
-  h2{font-size:28px;margin:0 0 4px}
-  .brief{color:var(--muted);margin:0 0 20px;max-width:70ch}
-  h3.group{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:26px 0 10px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
-  .ph{display:block;aspect-ratio:4/3;background:#ece5d9;position:relative;overflow:hidden}
-  .ph img{width:100%;height:100%;object-fit:cover;display:block}
-  .ph.broken::after{content:"Photo not loading — use the link below";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:var(--muted);font-size:14px}
-  .ph.broken img{display:none}
-  .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line)}
-  .thumbs a{aspect-ratio:4/3;background:#ece5d9;display:block;overflow:hidden}
-  .thumbs img{width:100%;height:100%;object-fit:cover;display:block}
-  .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
-  .tag{align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 9px;border-radius:99px;border:1px solid currentColor}
-  .tag.mine{color:var(--mine)} .tag.confirm{color:var(--confirm)}
-  h3{margin:2px 0 0;font-size:20px;line-height:1.25}
-  .maker{margin:0;color:var(--muted);font-size:14px}
-  .note{margin:4px 0 0}
-  ul.facts{margin:6px 0 0;padding-left:18px;color:var(--muted);font-size:14px}
-  .btn{margin-top:auto;padding-top:12px;font-weight:700;color:var(--accent);text-decoration:none}
-  .btn:hover{text-decoration:underline}
-  .slot{border:2px dashed var(--line);border-radius:14px;padding:24px;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;min-height:160px;font-size:15px}
-  .owned{background:#efe8dc;border-radius:12px;padding:14px 18px;margin-top:22px;font-size:14px;color:#4a443c}
-  .owned b{color:var(--ink)}
-  footer{max-width:1100px;margin:0 auto;padding:0 24px 56px;color:var(--muted);font-size:13px}
-  footer a{color:var(--accent)}
-  @media print{nav{display:none}.card{break-inside:avoid}body{background:#fff}}
-</style>
+<title>Mood board</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <h1>Things I like, by room</h1>
-  <p class="sub">For Angela · prepared 11 November 2026 · Alex · <a href="moodboard.html" style="color:var(--accent)">See the mood boards →</a></p>
-  <div class="legend">
-    <span><span class="tag mine">My pick</span> chosen by me</span>
-    <span><span class="tag confirm">To confirm</span> placeholder from the same maker, not yet confirmed by me</span>
+<header class="top">
+  <h1>Mood board</h1>
+  <p class="sub">For Angela · Alex · 11 November 2026 · click a board to open that room's page with links and photos</p>
+  <div class="overall">
+    <p><b>Overall feel.</b> Warm wood against black steel, rooms full of books and music, a few loud accents (neon city posters, one red chair) and equipment that stays visible and well made. Practical first, but not bare.</p>
+    <div class="chips">
+      <span class="chip">warm wood</span><span class="chip">black metal</span><span class="chip">books</span><span class="chip">hi-fi &amp; film</span><span class="chip">neon accents</span><span class="chip">home gym</span><span class="chip">Made in Italy</span>
+    </div>
+    <p class="fine">Read from the furniture and art coming from New York plus the products I picked. Colours are approximate, taken from photos, so please match them in person. Tiles marked <b>To confirm</b> are placeholders I have not chosen yet.</p>
   </div>
 </header>
 
-<nav><ul>
+<nav class="rooms"><ul>
   <li><a href="#office">Office &amp; home gym</a></li>
   <li><a href="#living">Living room</a></li>
   <li><a href="#dining">Dining room</a></li>
@@ -72,145 +31,94 @@
 <main>
 
 <!-- ============ OFFICE ============ -->
-<section id="office">
+<section class="room" id="office">
   <h2>Office &amp; home gym</h2>
-  <p class="brief">A working office that also holds a strength-training corner. The bench should stay in the room all the time, so it needs to look decent and be easy to move.</p>
-
-  <h3 class="group">Home gym</h3>
-  <div class="grid">
-    <article class="card">
-      <a class="ph" href="https://kingsmith.it/products/panca-bx2-allenamento-forza" target="_blank" rel="noopener"><img src="https://kingsmith.it/cdn/shop/files/12.29_1302.png?v=1778005704&amp;width=900" alt="KingSmith BX2 bench" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"></a>
-      <div class="thumbs">
-        <a href="https://kingsmith.it/products/panca-bx2-allenamento-forza" target="_blank" rel="noopener"><img src="https://kingsmith.it/cdn/shop/files/12.29_1333.webp?v=1778005565&amp;width=420" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></a>
-        <a href="https://kingsmith.it/products/panca-bx2-allenamento-forza" target="_blank" rel="noopener"><img src="https://kingsmith.it/cdn/shop/files/12.29_1355.webp?v=1778005565&amp;width=420" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></a>
-        <a href="https://kingsmith.it/products/panca-bx2-allenamento-forza" target="_blank" rel="noopener"><img src="https://kingsmith.it/cdn/shop/files/image_29.jpg?v=1777989388&amp;width=420" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></a>
-      </div>
-      <div class="body">
-        <span class="tag mine">My pick</span>
-        <h3>KingSmith BX2 — strength training bench</h3>
-        <p class="maker">KingSmith Italia · multifunction weight bench</p>
-        <p class="note">Adjustable bench with air-resistance arms (up to 80 kg), so no loose plates. It arrives assembled, has wheels to move it, and a built-in compartment for accessories.</p>
-        <ul class="facts">
-          <li>Size 122 × 41 × 41 cm, about 0.5 m² of floor, plus free space around it for exercises</li>
-          <li>Weight 43.5 kg; supports users up to 180 kg</li>
-          <li>Backrest has 6 positions, arms have 5 positions</li>
-          <li>Price seen 11 Nov 2026: €899 without dumbbells, €999 with dumbbells</li>
-        </ul>
-        <a class="btn" href="https://kingsmith.it/products/panca-bx2-allenamento-forza" target="_blank" rel="noopener">View on kingsmith.it →</a>
-      </div>
-    </article>
-    <div class="slot">More home-gym links go here<br>(rack, mat, storage, flooring…)</div>
-  </div>
-
-  <h3 class="group">Workspace</h3>
-  <div class="grid">
-    <div class="slot">Desk, storage, lighting and wall-art links go here</div>
-  </div>
-
-  <div class="owned"><b>Already coming from New York for this room:</b> electric standing desk (black), monitor on arm, Herman Miller Sayl chair (black), white 4-drawer chest, small mango-wood side table, large black bean bag, neon city posters, framed PhD diploma.</div>
+  <p class="feel">Focused and a little techy: dark desk setup, neon colour in the art, and a strength bench that lives in the room.</p>
+  <a class="collage" href="office.html" aria-label="Open the office and home gym page">
+    <div class="board">
+      <div class="tile hero"><img src="https://kingsmith.it/cdn/shop/files/12.29_1302.png?v=1778005704&amp;width=1100" alt="KingSmith BX2 bench" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"><div class="cap">KingSmith BX2 bench <em>· my pick</em></div></div>
+      <div class="tile a"><img src="https://kingsmith.it/cdn/shop/files/image_29.jpg?v=1777989388&amp;width=900" alt="BX2 in a home" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"><div class="cap">Bench in a home setting</div></div>
+      <div class="tile b words"><div class="big">Black desk.<br>Neon on the wall.<br>Gym within reach.</div></div>
+      <div class="tile c"><div class="swatches">
+        <div style="background:#1c1c1e;color:#fff">Black <span>#1C1C1E</span></div>
+        <div style="background:#3a3d42;color:#fff">Graphite <span>#3A3D42</span></div>
+        <div style="background:#ff3d9a;color:#111">Neon pink <span>#FF3D9A</span></div>
+        <div style="background:#2f7bff;color:#fff">Electric blue <span>#2F7BFF</span></div>
+      </div></div>
+      <div class="tile wide mat"><b>Materials</b><span>Black steel and mesh · matt black desk top · white painted drawers · a little warm wood (mango side table) · vegan leather on the bench</span></div>
+    </div>
+    <span class="go">Open the office page →</span>
+  </a>
 </section>
 
 <!-- ============ LIVING ============ -->
-<section id="living">
+<section class="room" id="living">
   <h2>Living room</h2>
-  <p class="brief">Books, music and film live here. Wall storage that can also divide the space is a strong plus.</p>
-  <div class="grid">
-    <article class="card">
-      <a class="ph" href="https://www.paciniecappellini.it/catalogo/librerie/elisabeth-libreria-modulare/" target="_blank" rel="noopener"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/libreria-elisabeth-modulare-componibile-pacini-e-cappellini.png" alt="Elisabeth modular bookcase" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"></a>
-      <div class="thumbs">
-        <a href="https://www.paciniecappellini.it/catalogo/librerie/elisabeth-libreria-modulare/" target="_blank" rel="noopener"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/Elisabeth_PeC-1-400x284.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></a>
-        <a href="https://www.paciniecappellini.it/catalogo/librerie/elisabeth-libreria-modulare/" target="_blank" rel="noopener"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/Elisabeth_PeC-2-400x284.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></a>
-        <a href="https://www.paciniecappellini.it/catalogo/librerie/elisabeth-libreria-modulare/" target="_blank" rel="noopener"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/Elisabeth_PeC-11-400x284.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></a>
-      </div>
-      <div class="body">
-        <span class="tag mine">My pick</span>
-        <h3>Elisabeth — modular bookcase</h3>
-        <p class="maker">Pacini &amp; Cappellini · design Cesare Arosio</p>
-        <p class="note">Asymmetric modular bookcase with large and small shelves. Works against a wall or as a divider in an open space, and can be mounted in a corner.</p>
-        <ul class="facts">
-          <li>Walnut canaletto veneer or wood-fibre structure; shelves, dividers and back panels in the same finish</li>
-          <li>Many finishes available (walnut, ash stains, matt lacquers)</li>
-          <li><a href="https://www.paciniecappellini.it/wp-content/uploads/2015/04/Elisabeth-size_PeC.png" target="_blank" rel="noopener">Dimensions</a> · <a href="http://www.paciniecappellini.it/schedatecnica/PeC_Elisabeth.pdf" target="_blank" rel="noopener">Technical sheet (PDF)</a></li>
-          <li>Price: on request from the maker</li>
-        </ul>
-        <a class="btn" href="https://www.paciniecappellini.it/catalogo/librerie/elisabeth-libreria-modulare/" target="_blank" rel="noopener">View on paciniecappellini.it →</a>
-      </div>
-    </article>
-
-    <article class="card">
-      <a class="ph" href="https://www.paciniecappellini.it/catalogo/sedie/kandy-poltroncina-da-salotto/" target="_blank" rel="noopener"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/poltroncina-kandy-libreria-elisabeth-pacini-cappellini.jpg" alt="Kandy armchair next to the Elisabeth bookcase" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"></a>
-      <div class="body">
-        <span class="tag confirm">To confirm</span>
-        <h3>Kandy — lounge armchair</h3>
-        <p class="maker">Pacini &amp; Cappellini · listed by the maker as a companion to Elisabeth</p>
-        <p class="note">Placeholder: reading chair in solid ash with a wide upholstered seat (fabric, leather or eco-leather). Shown here with Elisabeth.</p>
-        <a class="btn" href="https://www.paciniecappellini.it/catalogo/sedie/kandy-poltroncina-da-salotto/" target="_blank" rel="noopener">View on paciniecappellini.it →</a>
-      </div>
-    </article>
-    <div class="slot">More living-room links go here<br>(sofa, TV unit, lighting, rug, art…)</div>
-  </div>
-
-  <div class="owned"><b>Already coming from New York for this room:</b> TV unit and two tall bookcases (mango wood, black metal), lifting coffee table (light oak), two standing speakers, AV receiver, centre speaker, large taupe-grey rug, framed posters and photos.</div>
+  <p class="feel">Wall of books in walnut, black speakers and steel, low taupe rug, a reading chair. Calm base, strong objects.</p>
+  <a class="collage" href="living.html" aria-label="Open the living room page">
+    <div class="board">
+      <div class="tile hero"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/libreria-elisabeth-modulare-componibile-pacini-e-cappellini.png" alt="Elisabeth bookcase" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"><div class="cap">Elisabeth bookcase, Pacini &amp; Cappellini <em>· my pick</em></div></div>
+      <div class="tile a"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/Elisabeth_PeC-2.jpg" alt="Elisabeth in a room" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"><div class="cap">Elisabeth in a room</div></div>
+      <div class="tile b"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/poltroncina-kandy-libreria-elisabeth-pacini-cappellini.jpg" alt="Kandy armchair with Elisabeth" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"><span class="tbc">To confirm</span><div class="cap">Kandy armchair</div></div>
+      <div class="tile c"><div class="swatches">
+        <div style="background:#6b4a35;color:#fff">Walnut <span>#6B4A35</span></div>
+        <div style="background:#b9854f;color:#111">Mango wood <span>#B9854F</span></div>
+        <div style="background:#d2b48c;color:#111">Light oak <span>#D2B48C</span></div>
+        <div style="background:#8d8378;color:#fff">Taupe rug <span>#8D8378</span></div>
+        <div style="background:#1c1c1e;color:#fff">Black <span>#1C1C1E</span></div>
+      </div></div>
+      <div class="tile wide mat"><b>Materials</b><span>Walnut canaletto veneer · mango wood · black steel frames · low-pile wool-look rug · framed prints with white mats</span></div>
+    </div>
+    <span class="go">Open the living room page →</span>
+  </a>
 </section>
 
 <!-- ============ DINING ============ -->
-<section id="dining">
+<section class="room" id="dining">
   <h2>Dining room</h2>
-  <p class="brief">No picks from me yet. The two items below are placeholders from the same maker as the living-room bookcase, so the finishes would match.</p>
-  <div class="grid">
-    <article class="card">
-      <a class="ph" href="https://www.paciniecappellini.it/catalogo/tavoli/hope-tavolo-da-pranzo-personalizzabile-pacini-cappellini/" target="_blank" rel="noopener"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/tavolo-hope-legno-massello-pacini-e-cappellini.png" alt="Hope dining table" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"></a>
-      <div class="body">
-        <span class="tag confirm">To confirm</span>
-        <h3>Hope — dining table</h3>
-        <p class="maker">Pacini &amp; Cappellini · design Cesare Arosio</p>
-        <p class="note">Placeholder: solid-wood legs set at an angle, top in wood or glass, round or rectangular versions shown. Same wood finishes as Elisabeth.</p>
-        <a class="btn" href="https://www.paciniecappellini.it/catalogo/tavoli/hope-tavolo-da-pranzo-personalizzabile-pacini-cappellini/" target="_blank" rel="noopener">View on paciniecappellini.it →</a>
-      </div>
-    </article>
-    <article class="card">
-      <a class="ph" href="https://www.paciniecappellini.it/catalogo/sedie/thelma-sedia-moderna-in-noce/" target="_blank" rel="noopener"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/sedia-thelma-tavolo-hope-pacini-cappellini.jpg" alt="Thelma chair with Hope table" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"></a>
-      <div class="body">
-        <span class="tag confirm">To confirm</span>
-        <h3>Thelma — chair</h3>
-        <p class="maker">Pacini &amp; Cappellini · design Fabio Rebosio</p>
-        <p class="note">Placeholder: solid-wood chair whose back legs flow into the backrest; upholstered seat; armchair version available for the table ends.</p>
-        <a class="btn" href="https://www.paciniecappellini.it/catalogo/sedie/thelma-sedia-moderna-in-noce/" target="_blank" rel="noopener">View on paciniecappellini.it →</a>
-      </div>
-    </article>
-    <div class="slot">Dining links go here<br>(table, chairs, sideboard, pendant light…)</div>
-  </div>
-  <div class="owned"><b>Currently in use in New York (not confirmed as coming):</b> square steel-top table with dark wooden legs and two warm brown wooden chairs on black metal frames.</div>
+  <p class="feel">Placeholder direction: solid wood in the same walnut family as the bookcase, light legs, upholstered chairs. Open to Angela's ideas.</p>
+  <a class="collage" href="dining.html" aria-label="Open the dining room page">
+    <div class="board">
+      <div class="tile hero"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/tavolo-hope-ambientato-pacini-cappellini.jpg" alt="Hope table in a room" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"><span class="tbc">To confirm</span><div class="cap">Hope table, Pacini &amp; Cappellini</div></div>
+      <div class="tile a"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/sedia-thelma-tavolo-hope-pacini-cappellini.jpg" alt="Thelma chair at the Hope table" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"><span class="tbc">To confirm</span><div class="cap">Thelma chair at the table</div></div>
+      <div class="tile b"><img src="https://www.paciniecappellini.it/wp-content/uploads/2015/04/thelma-sedia-poltroncina-pacini-cappellini.jpg" alt="Thelma chair" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"><span class="tbc">To confirm</span><div class="cap">Thelma chair</div></div>
+      <div class="tile c"><div class="swatches">
+        <div style="background:#6b4a35;color:#fff">Walnut <span>#6B4A35</span></div>
+        <div style="background:#a8794a;color:#111">Warm brown <span>#A8794A</span></div>
+        <div style="background:#1c1c1e;color:#fff">Black <span>#1C1C1E</span></div>
+        <div style="background:#f3ece2;color:#111">Cream <span>#F3ECE2</span></div>
+      </div></div>
+      <div class="tile wide words"><div class="big">Wood table,<br>soft seats,<br>good light.</div></div>
+    </div>
+    <span class="go">Open the dining room page →</span>
+  </a>
 </section>
 
 <!-- ============ BEDROOM ============ -->
-<section id="bedroom">
+<section class="room" id="bedroom">
   <h2>Bedroom</h2>
-  <p class="brief">No picks from me yet. The bed below is a placeholder from the same maker.</p>
-  <div class="grid">
-    <article class="card">
-      <a class="ph" href="https://www.paciniecappellini.it/catalogo/letti/letto-nuvola/" target="_blank" rel="noopener"><img src="https://www.paciniecappellini.it/wp-content/uploads/2026/05/letto-matrimoniale-nuvola-pacini-cappellini.jpg" alt="Nuvola double bed" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"></a>
-      <div class="thumbs">
-        <a href="https://www.paciniecappellini.it/catalogo/letti/letto-nuvola/" target="_blank" rel="noopener"><img src="https://www.paciniecappellini.it/wp-content/uploads/2026/05/letto-matrimoniale-nuvola-frontale-pacini-cappellini-400x284.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></a>
-        <a href="https://www.paciniecappellini.it/catalogo/letti/letto-nuvola/" target="_blank" rel="noopener"><img src="https://www.paciniecappellini.it/wp-content/uploads/2026/05/letto-matrimoniale-nuvola-laterale-pacini-cappellini-400x284.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></a>
-        <a href="https://www.paciniecappellini.it/catalogo/letti/letto-nuvola/" target="_blank" rel="noopener"><img src="https://www.paciniecappellini.it/wp-content/uploads/2026/05/letto-matrimoniale-nuvola-cabina-armadio-pacini-cappellini-400x284.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></a>
-      </div>
-      <div class="body">
-        <span class="tag confirm">To confirm</span>
-        <h3>Nuvola — double bed</h3>
-        <p class="maker">Pacini &amp; Cappellini · design Norberto Delfinetti</p>
-        <p class="note">Placeholder: soft quilted fabric headboard with solid-wood feet; wide choice of fabrics, from sand and cream to dark velvet.</p>
-        <a class="btn" href="https://www.paciniecappellini.it/catalogo/letti/letto-nuvola/" target="_blank" rel="noopener">View on paciniecappellini.it →</a>
-      </div>
-    </article>
-    <div class="slot">Bedroom links go here<br>(bedside tables, wardrobe, lighting, textiles…)</div>
-  </div>
+  <p class="feel">Placeholder direction: the quietest room. Soft fabric, natural wood feet, sand and cream with one dark note.</p>
+  <a class="collage" href="bedroom.html" aria-label="Open the bedroom page">
+    <div class="board">
+      <div class="tile hero"><img src="https://www.paciniecappellini.it/wp-content/uploads/2026/05/letto-matrimoniale-nuvola-pacini-cappellini.jpg" alt="Nuvola bed" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"><span class="tbc">To confirm</span><div class="cap">Nuvola bed, Pacini &amp; Cappellini</div></div>
+      <div class="tile a"><img src="https://www.paciniecappellini.it/wp-content/uploads/2026/05/letto-matrimoniale-nuvola-cabina-armadio-pacini-cappellini.jpg" alt="Nuvola bed with wardrobe" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"><span class="tbc">To confirm</span><div class="cap">Bed with wardrobe in view</div></div>
+      <div class="tile b"><img src="https://www.paciniecappellini.it/wp-content/uploads/2026/05/letto-matrimoniale-nuvola-dettaglio-piedino-legno-massello-pacini-cappellini.jpg" alt="Solid wood bed foot" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('broken')"><span class="tbc">To confirm</span><div class="cap">Solid wood foot detail</div></div>
+      <div class="tile c"><div class="swatches">
+        <div style="background:#cdbfae;color:#111">Sand <span>#CDBFAE</span></div>
+        <div style="background:#f3ece2;color:#111">Cream <span>#F3ECE2</span></div>
+        <div style="background:#b79068;color:#111">Natural wood <span>#B79068</span></div>
+        <div style="background:#2b2724;color:#fff">Dark velvet <span>#2B2724</span></div>
+      </div></div>
+      <div class="tile wide mat"><b>Materials</b><span>Quilted fabric headboard · solid wood feet · linen or cotton bedding · warm, low lighting</span></div>
+    </div>
+    <span class="go">Open the bedroom page →</span>
+  </a>
 </section>
 
 </main>
 
 <footer>
-  Photos are loaded from the manufacturers' own sites and stay their property; if one does not load, the link under it goes to the product page. Prices and details as seen on 11 November 2026 and may change. · <a href="moodboard.html">Mood boards</a>
+  Photos are loaded from the manufacturers' own sites and stay their property; if one does not load, open the room page and use the link under it.
 </footer>
 
 </body>
