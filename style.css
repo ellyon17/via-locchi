@@ -91,3 +91,22 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 56px;color:var(--muted);fon
   .c{grid-column:span 1;grid-row:span 2}
 }
 @media print{nav.rooms{display:none}.card{break-inside:avoid}body{background:#fff}}
+
+/* office additions */
+.secnote{color:var(--muted);margin:-4px 0 14px;max-width:75ch}
+.concept{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.concept>div{border-radius:14px;padding:18px 20px}
+.concept .bw{padding:0;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;background:#f4f4f2;color:#111}
+.concept .bw>div{padding:18px 20px}
+.concept .bw>div:first-child{background:#111;color:#fff}
+.concept .hue{background:#14121a;color:#fff;display:flex;flex-direction:column;gap:10px}
+.hue .bar{height:14px;border-radius:99px;background:linear-gradient(90deg,#ff2d95,#7a3cff,#2f7bff,#00e5ff,#ff2d95)}
+.ph.noimg{display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:var(--muted);font-size:14px;text-decoration:none}
+.slot.photo{min-height:200px;flex-direction:column;gap:4px}
+.layers{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:20px;max-width:640px}
+.layers ol{margin:6px 0 0;padding-left:20px}
+.layers li{margin:2px 0}
+@media (max-width:760px){.concept{grid-template-columns:1fr}}
+
+.slot{align-self:start}
+.slot>div{line-height:1.9}
