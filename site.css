@@ -20,6 +20,7 @@ body.jem .sitebar{background:rgba(248,244,238,.96)}
 .acard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
 .acard b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .acard p{margin:0}
+.acard p+p{margin-top:10px}
 .todo{color:var(--muted);font-style:italic}
 .chips.pad{margin-top:16px}
 .palette{display:flex;border-radius:12px;overflow:hidden;margin-top:16px;border:1px solid var(--line)}
