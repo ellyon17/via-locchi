@@ -1,0 +1,120 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Via Locchi 8 – 3D</title>
+<style>
+:root{--bg:#ece9e1;--ink:#222}@media(prefers-color-scheme:dark){:root{--bg:#1d1d1d;--ink:#eee}}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:14px system-ui,sans-serif}
+header{position:fixed;top:0;left:0;right:0;padding:8px 14px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:#0000;pointer-events:none}
+header>*{pointer-events:auto}h1{font-size:16px;margin:0}canvas{width:100%;height:100%;display:block;touch-action:none}
+#n{position:fixed;left:14px;bottom:10px;font-size:12px;opacity:.75;max-width:520px}
+#lab{position:fixed;inset:0;pointer-events:none;overflow:hidden}#lab span{position:absolute;transform:translate(-50%,-50%);font-size:12px;font-weight:600;text-shadow:0 0 3px var(--bg),0 0 3px var(--bg)}
+</style></head><body>
+<header><h1>Via Locchi 8 · 3D (dalla pianta 1:100)</h1>
+<label>pareti <input type=range id=wh min=0 max=100 value=35></label>
+<label><input type=checkbox id=lb checked> etichette</label><label><input type=checkbox id=fc checked> arredi</label>
+<button id=btop>vista dall'alto</button><button id=iso>vista isometrica</button>
+<span style="opacity:.7">trascina = ruota · tasto destro o maiusc = sposta · rotella = zoom</span></header>
+<canvas id=c></canvas><div id=lab></div>
+<div id=n>Le altezze sono ipotizzate: soggiorno 345 cm (indicata sulla tavola), altri locali 300 cm, parapetto del terrazzo 110 cm. Spessore dei muri interni ≈ 14 cm, esterni ≈ 28 cm (ipotesi). Le finestre non sono modellate. Gli arredi (cucina, entrambi i bagni) sono approssimativi: posizioni e misure lette dalle foto dell'annuncio, non misurate; sono del precedente proprietario, tranne quelli che teniamo.</div>
+<script>
+const D={"fp": [[142.6, 0.0], [40.0, 102.6], [0.0, 102.6], [0.0, 669.1], [106.2, 669.1], [106.2, 1046.6], [117.4, 1048.3], [115.7, 1062.5], [77.0, 1062.5], [75.3, 1072.9], [43.4, 1072.9], [41.7, 1062.5], [26.6, 1062.5], [24.9, 1072.9], [16.1, 1078.5], [16.1, 1689.6], [112.3, 1689.6], [114.0, 1710.7], [125.8, 1715.7], [124.1, 1731.7], [569.6, 1731.7], [573.0, 1771.2], [581.4, 1794.7], [599.9, 1818.3], [635.2, 1835.1], [1010.1, 1835.1], [1040.4, 1826.7], [1072.3, 1798.1], [1081.6, 1769.5], [1081.6, 1621.6], [1084.1, 1618.2], [1280.8, 1618.2], [1284.1, 1575.0], [1374.9, 1575.0], [1376.6, 1567.8], [1395.9, 1575.0], [1395.9, 1072.9], [1475.5, 1072.9], [1475.5, 1058.3], [1484.2, 1056.7], [1484.2, 883.5], [1475.5, 881.8], [1475.5, 873.4], [1344.7, 873.4], [1342.1, 863.3], [1342.1, 746.7], [1393.4, 746.7], [1395.9, 743.9], [1395.9, 236.9], [1435.5, 231.2], [1475.5, 177.4], [1475.5, 121.9], [1467.4, 120.2], [1467.4, 102.6], [1306.0, 102.6], [1230.3, 59.7], [1191.7, 49.2], [1149.6, 49.2], [1117.7, 53.0], [1075.7, 68.1], [1023.6, 102.6], [492.3, 102.6], [389.7, 0.0]], "rooms": {"cam_left": [[0.0, 152.2], [0.0, 530.4], [310.7, 530.4], [315.8, 533.8], [315.8, 626.3], [458.7, 626.3], [462.0, 626.3], [543.6, 626.3], [543.6, 475.8], [448.6, 475.8], [442.7, 471.6], [442.7, 118.5], [371.2, 49.2], [361.1, 49.2], [356.1, 34.5], [172.8, 34.5], [172.8, 46.2], [161.1, 47.9], [91.3, 116.8], [91.3, 152.2]], "cam_mid": [[458.7, 152.2], [458.7, 460.7], [557.9, 460.7], [557.9, 626.3], [620.1, 626.3], [623.4, 626.3], [867.2, 626.3], [868.9, 596.0], [868.9, 152.2], [690.7, 152.2], [687.3, 137.0], [581.4, 137.0], [578.0, 152.2]], "cucina": [[1374.1, 236.9], [1255.6, 236.9], [1250.5, 236.9], [1211.0, 236.9], [1211.0, 263.1], [1124.4, 263.1], [1119.4, 236.9], [1084.1, 236.9], [1080.7, 236.9], [966.4, 236.9], [961.3, 236.9], [879.0, 236.9], [879.0, 690.6], [887.4, 695.2], [887.4, 736.8], [922.7, 736.8], [924.4, 723.8], [929.4, 736.8], [963.0, 736.8], [963.0, 695.2], [968.1, 690.6], [1184.1, 690.6], [1190.0, 695.2], [1190.0, 724.9], [1253.0, 724.9], [1253.0, 673.3], [1258.9, 664.1], [1374.1, 664.1]], "soggiorno": [[1061.0, 1072.9], [879.0, 1072.9], [879.0, 1053.3], [830.2, 1053.3], [825.2, 1053.3], [768.0, 1053.3], [764.6, 1072.9], [586.7, 1072.9], [586.7, 1194.5], [565.4, 1192.8], [565.4, 1072.9], [16.1, 1072.9], [16.1, 1689.6], [114.0, 1689.6], [117.4, 1699.7], [473.8, 1699.7], [473.8, 1688.8], [480.5, 1682.9], [565.4, 1682.9], [565.4, 1450.1], [573.0, 1445.0], [586.7, 1448.4], [586.7, 1543.4], [699.1, 1543.4], [702.4, 1551.8], [946.2, 1551.8], [951.3, 1543.4], [1061.0, 1543.4]], "cam_br": [[1095.8, 1053.3], [1095.8, 1072.9], [1074.8, 1072.9], [1074.8, 1575.0], [1169.8, 1575.0], [1173.2, 1587.9], [1277.4, 1587.9], [1277.4, 1576.2], [1282.5, 1575.0], [1369.9, 1575.0], [1369.9, 1072.9], [1191.7, 1072.9], [1184.1, 1066.7], [1184.1, 1053.3], [1142.9, 1053.3], [1139.6, 1053.3]], "atrio": [[416.2, 640.1], [416.2, 695.2], [416.2, 698.6], [416.2, 1053.3], [519.2, 1053.3], [519.2, 1048.3], [525.9, 1040.0], [825.2, 1040.0], [828.5, 1040.0], [1332.1, 1040.0], [1332.1, 811.2], [1332.1, 807.8], [1332.1, 746.7], [927.7, 746.7], [922.7, 746.7], [786.5, 746.7], [781.5, 746.7], [684.8, 746.7], [684.8, 925.5], [673.9, 928.9], [668.8, 925.5], [668.8, 640.1], [623.4, 640.1], [620.1, 640.1], [463.7, 640.1], [458.7, 640.1]], "bagno1": [[131.2, 545.1], [131.2, 611.1], [136.7, 649.8], [136.7, 732.2], [248.5, 732.2], [251.9, 746.7], [302.3, 746.7], [302.3, 545.1]], "bagno1_ante": [[307.3, 640.1], [307.3, 746.7], [402.0, 746.7], [402.0, 700.2], [402.0, 695.2], [402.0, 659.9], [367.9, 659.9], [362.8, 640.1]], "bagno1_closet": [[0.0, 545.1], [0.0, 634.7], [131.2, 634.7], [131.2, 545.1]], "bagno2": [[140.9, 757.0], [140.9, 1040.0], [288.0, 1040.0], [288.0, 925.5], [292.2, 923.0], [402.0, 923.0], [402.0, 848.2], [402.0, 844.8], [402.0, 757.0], [275.4, 757.0], [275.4, 849.9], [263.6, 851.5], [260.3, 848.2], [260.3, 757.0]], "bagno2_box": [[307.3, 927.2], [307.3, 1009.6], [402.0, 1009.6], [402.0, 927.2]], "niche_top": [[696.6, 645.6], [696.6, 736.8], [781.5, 736.8], [784.8, 736.8], [858.0, 736.8], [858.0, 645.6]], "closet_laundry": [[879.0, 126.1], [879.0, 220.2], [961.3, 220.2], [964.7, 220.2], [1015.1, 220.2], [1015.1, 126.1]], "veranda": [[1029.4, 220.2], [1427.1, 220.2], [1456.5, 174.0], [1456.5, 126.1], [1294.2, 126.1], [1282.5, 108.4], [1233.7, 79.9], [1188.3, 68.1], [1134.5, 68.1], [1094.2, 79.9], [1092.5, 84.9], [1082.4, 84.9], [1048.8, 102.6], [1029.4, 120.2]], "closet_atrio_r": [[1348.0, 886.9], [1348.0, 1040.0], [1381.7, 1040.0], [1388.4, 1053.3], [1460.7, 1053.3], [1460.7, 886.9]], "terrazzo": [[586.7, 1575.0], [586.7, 1764.5], [599.9, 1793.0], [625.1, 1814.9], [638.6, 1817.4], [1018.5, 1817.4], [1040.4, 1808.2], [1061.0, 1781.3], [1061.0, 1575.0], [946.2, 1575.0], [944.5, 1561.9], [704.1, 1561.9], [702.4, 1575.0]], "kitchen_low": [[1382.5, 669.1], [1258.9, 669.1], [1258.9, 724.9], [1184.1, 724.9], [1184.1, 696.0], [968.9, 696.0], [968.9, 746.7], [1290.0, 746.7], [1290.0, 693.5], [1295.9, 690.6], [1332.1, 690.6], [1332.1, 724.9], [1382.5, 724.9]]}, "names": {"cam_left": "Camera (lato strada)", "cam_mid": "Camera (centrale)", "cucina": "Cucina", "soggiorno": "Soggiorno", "cam_br": "Camera (lato mare)", "atrio": "Ingresso", "bagno1": "Bagno 1", "bagno1_ante": "Nicchia bagno 1", "bagno1_closet": "Armadio", "bagno2": "Bagno 2", "bagno2_box": "Box bagno 2", "niche_top": "Nicchia", "closet_laundry": "Ripostiglio lavanderia", "veranda": "Veranda", "closet_atrio_r": "Armadio ingresso", "terrazzo": "Terrazzo", "kitchen_low": "Nicchia cucina"}, "ops": [{"a": [421.7, 633.0], "b": [495.6, 633.0], "t": "d"}, {"a": [583.1, 633.0], "b": [655.4, 633.0], "t": "d"}, {"a": [409.1, 673.3], "b": [409.1, 732.2], "t": "d"}, {"a": [409.1, 828.0], "b": [409.1, 878.4], "t": "d"}, {"a": [741.1, 745.6], "b": [818.4, 745.6], "t": "d"}, {"a": [875.6, 745.6], "b": [959.7, 745.6], "t": "d"}, {"a": [1339.6, 769.2], "b": [1339.6, 846.5], "t": "d"}, {"a": [1339.6, 955.8], "b": [1339.6, 1029.8], "t": "d"}, {"a": [764.6, 1063.4], "b": [875.6, 1063.4], "t": "d"}, {"a": [1087.4, 1063.4], "b": [1179.9, 1063.4], "t": "d"}],"furn":[{"room": "Cucina", "name": "Basi (lungo la parete dell'ingresso)", "x": 969, "y": 687, "w": 321, "d": 60, "h": 90, "z": 0, "c": "#e9e5da"}, {"room": "Cucina", "name": "Piano di lavoro", "x": 969, "y": 687, "w": 321, "d": 60, "h": 4, "z": 90, "c": "#3b3b3f"}, {"room": "Cucina", "name": "Colonna forno", "x": 1235, "y": 687, "w": 55, "d": 60, "h": 215, "z": 0, "c": "#e9e5da"}, {"room": "Cucina", "name": "Pensili", "x": 969, "y": 712, "w": 266, "d": 35, "h": 70, "z": 140, "c": "#e9e5da"}, {"room": "Cucina", "name": "Penisola", "x": 990, "y": 487, "w": 70, "d": 200, "h": 90, "z": 0, "c": "#e9e5da"}, {"room": "Cucina", "name": "Penisola, piano in legno", "x": 985, "y": 487, "w": 100, "d": 200, "h": 4, "z": 90, "c": "#b9803f"}, {"room": "Cucina", "name": "Sgabello", "x": 1100, "y": 510, "w": 38, "d": 38, "h": 75, "z": 0, "c": "#4a3036"}, {"room": "Cucina", "name": "Sgabello", "x": 1100, "y": 585, "w": 38, "d": 38, "h": 75, "z": 0, "c": "#4a3036"}, {"room": "Cucina", "name": "Tavolo da pranzo", "x": 1130, "y": 380, "w": 200, "d": 95, "h": 75, "z": 0, "c": "#a8773f"}, {"room": "Cucina", "name": "Sedia", "x": 1150, "y": 333, "w": 40, "d": 40, "h": 90, "z": 0, "c": "#34303a"}, {"room": "Cucina", "name": "Sedia", "x": 1150, "y": 482, "w": 40, "d": 40, "h": 90, "z": 0, "c": "#34303a"}, {"room": "Cucina", "name": "Sedia", "x": 1215, "y": 333, "w": 40, "d": 40, "h": 90, "z": 0, "c": "#34303a"}, {"room": "Cucina", "name": "Sedia", "x": 1215, "y": 482, "w": 40, "d": 40, "h": 90, "z": 0, "c": "#34303a"}, {"room": "Cucina", "name": "Sedia", "x": 1280, "y": 333, "w": 40, "d": 40, "h": 90, "z": 0, "c": "#34303a"}, {"room": "Cucina", "name": "Sedia", "x": 1280, "y": 482, "w": 40, "d": 40, "h": 90, "z": 0, "c": "#34303a"}, {"room": "Cucina", "name": "Divano", "x": 885, "y": 320, "w": 80, "d": 180, "h": 80, "z": 0, "c": "#b5675f"}, {"room": "Bagno 1", "name": "Piatto doccia", "x": 137, "y": 545, "w": 85, "d": 100, "h": 6, "z": 0, "c": "#f5f5f5"}, {"room": "Bagno 1", "name": "WC (sospeso)", "x": 160, "y": 680, "w": 38, "d": 52, "h": 40, "z": 0, "c": "#ffffff"}, {"room": "Bagno 1", "name": "Bidet (sospeso)", "x": 205, "y": 680, "w": 38, "d": 52, "h": 40, "z": 0, "c": "#ffffff"}, {"room": "Bagno 1", "name": "Mobile lavabo, legno scuro", "x": 252, "y": 590, "w": 50, "d": 80, "h": 85, "z": 0, "c": "#4b3a30"}, {"room": "Bagno 1", "name": "Termoarredo", "x": 320, "y": 741, "w": 50, "d": 6, "h": 150, "z": 20, "c": "#f2f2f2"}, {"room": "Bagno 2", "name": "Vasca", "x": 141, "y": 757, "w": 70, "d": 170, "h": 55, "z": 0, "c": "#ffffff"}, {"room": "Bagno 2", "name": "Mobile lavabo", "x": 141, "y": 940, "w": 55, "d": 100, "h": 85, "z": 0, "c": "#f1efe9"}, {"room": "Bagno 2", "name": "WC", "x": 200, "y": 988, "w": 40, "d": 52, "h": 40, "z": 0, "c": "#ffffff"}, {"room": "Bagno 2", "name": "Bidet", "x": 245, "y": 988, "w": 40, "d": 52, "h": 40, "z": 0, "c": "#ffffff"}, {"room": "Bagno 2", "name": "Piatto doccia", "x": 307, "y": 927, "w": 95, "d": 83, "h": 6, "z": 0, "c": "#f5f5f5"}]};
+const cv=document.getElementById('c'),gl=cv.getContext('webgl',{antialias:true});
+const H0={soggiorno:345,terrazzo:110,veranda:110};const hOf=k=>H0[k]||300;
+const col={soggiorno:[.93,.88,.78],atrio:[.88,.86,.82],cucina:[.82,.88,.9],terrazzo:[.7,.76,.7],veranda:[.75,.82,.88]};
+const dflt=[.9,.87,.83];
+// ---- geometry helpers
+function area2(p){let a=0;for(let i=0;i<p.length;i++){const q=p[(i+1)%p.length];a+=p[i][0]*q[1]-q[0]*p[i][1]}return a}
+function tri(p0){let p=p0.slice();if(area2(p)<0)p.reverse();const out=[];let idx=p.map((_,i)=>i),g=0;
+ const cr=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+ const inT=(pt,a,b,c)=>cr(a,b,pt)>=0&&cr(b,c,pt)>=0&&cr(c,a,pt)>=0;
+ while(idx.length>3&&g++<5000){let f=false;for(let i=0;i<idx.length;i++){const a=p[idx[(i+idx.length-1)%idx.length]],b=p[idx[i]],c=p[idx[(i+1)%idx.length]];
+  if(cr(a,b,c)<=1e-6)continue;let ok=true;for(const j of idx){const q=p[j];if(q===a||q===b||q===c)continue;if(inT(q,a,b,c)){ok=false;break}}
+  if(ok){out.push(a,b,c);idx.splice(i,1);f=true;break}}if(!f)break}
+ if(idx.length==3)out.push(p[idx[0]],p[idx[1]],p[idx[2]]);return out}
+// vertex buffers: pos(3) normal(3) color(3); y is up, plan y -> z
+const V=[];function push(p,n,c){V.push(p[0],p[1],p[2],n[0],n[1],n[2],c[0],c[1],c[2])}
+function quad(a,b,c,d,n,col){push(a,n,col);push(b,n,col);push(c,n,col);push(a,n,col);push(c,n,col);push(d,n,col)}
+const P3=(x,y,z)=>[x,z,y];
+// floors
+const floorV0=V.length;
+for(const k in D.rooms){const c=col[k]||dflt;for(let i=0;i<0;i++);const t=tri(D.rooms[k]);for(let i=0;i<t.length;i+=3){for(let j=0;j<3;j++)push(P3(t[i+j][0],t[i+j][1],0),[0,1,0],c)}}
+const floorEnd=V.length/9;
+// openings -> cut intervals
+const ops=D.ops.map(o=>({h:Math.abs(o.a[1]-o.b[1])<1,a:o.a,b:o.b}));
+function cuts(a,b){// returns segments of edge a-b not covered by openings (axis-aligned only)
+ const hz=Math.abs(a[1]-b[1])<2,vt=Math.abs(a[0]-b[0])<2;if(!hz&&!vt)return[[a,b]];
+ const pos=hz?(a[1]+b[1])/2:(a[0]+b[0])/2;let lo=hz?Math.min(a[0],b[0]):Math.min(a[1],b[1]),hi=hz?Math.max(a[0],b[0]):Math.max(a[1],b[1]);
+ let iv=[[lo,hi]];
+ for(const o of ops){if(o.h!==hz)continue;const op=hz?(o.a[1]+o.b[1])/2:(o.a[0]+o.b[0])/2;if(Math.abs(op-pos)>22)continue;
+  const ol=hz?Math.min(o.a[0],o.b[0]):Math.min(o.a[1],o.b[1]),oh=hz?Math.max(o.a[0],o.b[0]):Math.max(o.a[1],o.b[1]);
+  const n=[];for(const [l,h] of iv){if(oh<=l||ol>=h){n.push([l,h]);continue}if(ol>l)n.push([l,ol]);if(oh<h)n.push([oh,h])}iv=n}
+ return iv.filter(([l,h])=>h-l>2).map(([l,h])=>hz?[[l,pos],[h,pos]]:[[pos,l],[pos,h]])}
+// walls: each room edge extruded outward by thickness T
+const wallStart=V.length/9;const WALL=[.96,.95,.93],TOP=[.35,.35,.38];
+const outerPoly=D.fp;
+function nearBoundary(pt){let best=1e9;for(let i=0;i<outerPoly.length;i++){const a=outerPoly[i],b=outerPoly[(i+1)%outerPoly.length];
+ const dx=b[0]-a[0],dy=b[1]-a[1],L=dx*dx+dy*dy||1;let t=((pt[0]-a[0])*dx+(pt[1]-a[1])*dy)/L;t=Math.max(0,Math.min(1,t));best=Math.min(best,Math.hypot(pt[0]-a[0]-t*dx,pt[1]-a[1]-t*dy))}return best}
+const wallRanges=[];// for dynamic height: we rebuild every change
+function hex(h){return [1,3,5].map(i=>parseInt(h.substr(i,2),16)/255)}
+function box(x,y,w,d,h,z,c){const C=hex(c),a=[x,y],b=[x+w,y],cc=[x+w,y+d],e=[x,y+d];
+ quad(P3(a[0],a[1],z+h),P3(b[0],b[1],z+h),P3(cc[0],cc[1],z+h),P3(e[0],e[1],z+h),[0,1,0],C);
+ quad(P3(e[0],e[1],z),P3(cc[0],cc[1],z),P3(cc[0],cc[1],z+h),P3(e[0],e[1],z+h),[0,0,1],C);
+ quad(P3(b[0],b[1],z),P3(a[0],a[1],z),P3(a[0],a[1],z+h),P3(b[0],b[1],z+h),[0,0,-1],C);
+ quad(P3(cc[0],cc[1],z),P3(b[0],b[1],z),P3(b[0],b[1],z+h),P3(cc[0],cc[1],z+h),[1,0,0],C);
+ quad(P3(a[0],a[1],z),P3(e[0],e[1],z),P3(e[0],e[1],z+h),P3(a[0],a[1],z+h),[-1,0,0],C)}
+function buildWalls(f){V.length=wallStart*9;
+ for(const k in D.rooms){const p=D.rooms[k].slice();const ccw=area2(p)>0;const hh=hOf(k)*f;if(hh<1)continue;
+  for(let i=0;i<p.length;i++){const a0=p[i],b0=p[(i+1)%p.length];const dx=b0[0]-a0[0],dy=b0[1]-a0[1],L=Math.hypot(dx,dy);if(L<3)continue;
+   // outward normal (away from room interior)
+   let nx=dy/L,ny=-dx/L;if(!ccw){nx=-nx;ny=-ny}
+   const mid=[(a0[0]+b0[0])/2,(a0[1]+b0[1])/2];const T=nearBoundary(mid)<26?28:14;
+   for(const [a,b] of cuts(a0,b0)){
+    const a2=[a[0]+nx*T,a[1]+ny*T],b2=[b[0]+nx*T,b[1]+ny*T];
+    // inner face (faces room): normal = -n
+    const ni=[-nx,0,-ny];quad(P3(a[0],a[1],0),P3(b[0],b[1],0),P3(b[0],b[1],hh),P3(a[0],a[1],hh),ni,WALL);
+    const no=[nx,0,ny];quad(P3(b2[0],b2[1],0),P3(a2[0],a2[1],0),P3(a2[0],a2[1],hh),P3(b2[0],b2[1],hh),no,WALL);
+    quad(P3(a[0],a[1],hh),P3(b[0],b[1],hh),P3(b2[0],b2[1],hh),P3(a2[0],a2[1],hh),[0,1,0],TOP);
+    // end caps
+    quad(P3(a[0],a[1],0),P3(a[0],a[1],hh),P3(a2[0],a2[1],hh),P3(a2[0],a2[1],0),[-ny,0,nx],WALL);
+    quad(P3(b[0],b[1],0),P3(b2[0],b2[1],0),P3(b2[0],b2[1],hh),P3(b[0],b[1],hh),[ny,0,-nx],WALL);}}}
+ if(fc.checked)for(const q of D.furn)box(q.x,q.y,q.w,q.d,q.h,q.z,q.c);
+ gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(V),gl.DYNAMIC_DRAW);N=V.length/9}
+// ---- gl
+const vs=`attribute vec3 p,n,c;uniform mat4 M;varying vec3 vn,vc;void main(){vn=n;vc=c;gl_Position=M*vec4(p,1.);}`;
+const fs=`precision mediump float;varying vec3 vn,vc;void main(){vec3 L=normalize(vec3(.4,.9,.5));float d=max(dot(normalize(vn),L),0.)*.55+.45;float s=abs(vn.x)*.06;gl_FragColor=vec4(vc*d-s,1.);}`;
+function sh(t,s){const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o}
+const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
+const buf=gl.createBuffer();let N=0;gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+for(const [n,o,s] of [['p',0,3],['n',3,3],['c',6,3]]){const l=gl.getAttribLocation(pr,n);gl.enableVertexAttribArray(l);gl.vertexAttribPointer(l,3,gl.FLOAT,false,36,o*4)}
+const uM=gl.getUniformLocation(pr,'M');gl.enable(gl.DEPTH_TEST);
+const xs=D.fp.map(p=>p[0]),ys=D.fp.map(p=>p[1]);const cx=(Math.min(...xs)+Math.max(...xs))/2,cz=(Math.min(...ys)+Math.max(...ys))/2;
+let yaw=-0.6,pit=0.9,dist=2800,tx=0,tz=0;
+function mul(a,b){const o=new Float32Array(16);for(let i=0;i<4;i++)for(let j=0;j<4;j++){let s=0;for(let k=0;k<4;k++)s+=a[k*4+j]*b[i*4+k];o[i*4+j]=s}return o}
+function cam(){const w=cv.width,h=cv.height,f=1/Math.tan(.35),ne=50,fa=20000;
+ const P=new Float32Array([f*h/w,0,0,0, 0,f,0,0, 0,0,(fa+ne)/(ne-fa),-1, 0,0,2*fa*ne/(ne-fa),0]);
+ const ex=Math.sin(yaw)*Math.cos(pit)*dist,ey=Math.sin(pit)*dist,ez=Math.cos(yaw)*Math.cos(pit)*dist;
+ const t=[cx+tx,0,cz+tz];const e=[t[0]+ex,ey,t[2]+ez];
+ let z=[e[0]-t[0],e[1]-t[1],e[2]-t[2]];const zl=Math.hypot(...z);z=z.map(v=>v/zl);
+ let x=[z[2]*0-0*z[1],0*z[0]-0*z[2],0];x=[ -z[2]*1+0, 0, z[0]*1];// up=(0,1,0): x=up×z
+ x=[1*z[2]-0*z[1],0*z[0]-0*z[2],0*z[1]-1*z[0]];x=[z[2],0,-z[0]];const xl=Math.hypot(...x);x=x.map(v=>v/xl);
+ const y=[z[1]*x[2]-z[2]*x[1],z[2]*x[0]-z[0]*x[2],z[0]*x[1]-z[1]*x[0]];
+ const V4=new Float32Array([x[0],y[0],z[0],0, x[1],y[1],z[1],0, x[2],y[2],z[2],0, -(x[0]*e[0]+x[1]*e[1]+x[2]*e[2]),-(y[0]*e[0]+y[1]*e[1]+y[2]*e[2]),-(z[0]*e[0]+z[1]*e[1]+z[2]*e[2]),1]);
+ return mul(P,V4)}
+function labels(M){const L=document.getElementById('lab');L.innerHTML='';if(!lb.checked)return;
+ for(const k in D.rooms){const p=D.rooms[k];const bx=p.map(q=>q[0]),by=p.map(q=>q[1]);if(Math.max(...bx)-Math.min(...bx)<140||Math.max(...by)-Math.min(...by)<100)continue;
+  const x=(Math.min(...bx)+Math.max(...bx))/2,z=(Math.min(...by)+Math.max(...by))/2;
+  const cw=M[0]*x+M[8]*z+M[12],ch=M[1]*x+M[9]*z+M[13],cc=M[3]*x+M[11]*z+M[15];
+  const s=document.createElement('span');s.textContent=D.names[k]||k;s.style.left=((cw/cc+1)/2*100)+'%';s.style.top=((1-ch/cc)/2*100)+'%';L.appendChild(s)}}
+function draw(){const dpr=devicePixelRatio||1,w=cv.clientWidth*dpr|0,h=cv.clientHeight*dpr|0;if(cv.width!=w||cv.height!=h){cv.width=w;cv.height=h}
+ gl.viewport(0,0,w,h);const b=getComputedStyle(document.body).backgroundColor.match(/\d+/g).map(Number);gl.clearColor(b[0]/255,b[1]/255,b[2]/255,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+ const M=cam();gl.uniformMatrix4fv(uM,false,M);gl.drawArrays(gl.TRIANGLES,0,N);labels(M)}
+buildWalls(.35);draw();
+wh.oninput=()=>{buildWalls(wh.value/100);draw()};lb.onchange=draw;fc.onchange=()=>{buildWalls(wh.value/100);draw()};
+btop.onclick=()=>{pit=1.5;yaw=0;dist=2400;tx=tz=0;draw()};iso.onclick=()=>{pit=.9;yaw=-.6;dist=2800;tx=tz=0;draw()};
+let dr=null;cv.onpointerdown=e=>{dr={x:e.clientX,y:e.clientY,pan:e.button==2||e.shiftKey};cv.setPointerCapture(e.pointerId)};
+cv.oncontextmenu=e=>e.preventDefault();
+cv.onpointermove=e=>{if(!dr)return;const dx=e.clientX-dr.x,dy=e.clientY-dr.y;dr.x=e.clientX;dr.y=e.clientY;
+ if(dr.pan){const k=dist/900;tx-=(dx*Math.cos(yaw)-dy*Math.sin(yaw)*Math.sin(pit))*k;tz+=(dx*Math.sin(yaw)+dy*Math.cos(yaw)*Math.sin(pit))*k*(-1)*-1;}
+ else{yaw-=dx*.006;pit=Math.max(.05,Math.min(1.56,pit+dy*.006))}draw()};
+cv.onpointerup=()=>dr=null;cv.onwheel=e=>{e.preventDefault();dist=Math.max(400,Math.min(9000,dist*(e.deltaY>0?1.1:1/1.1)));draw()};
+addEventListener('resize',draw);
+</script></body></html>
